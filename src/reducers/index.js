@@ -6,6 +6,7 @@ export const FETCH_WEATHER_API_REQUEST = 'FETCH_WEATHER_API_REQUEST';
 export const FETCH_WEATHER_API_SUCCESS = 'FETCH_WEATHER_API_SUCCESS';
 export const FETCH_WEATHER_API_FAILURE = 'FETCH_WEATHER_API_FAILURE';
 export const API_STOP = 'API_STOP';
+export const mockFetchAction = () => ({ type: 'MOCK_FETCH_ACTION' });
 
 
 export const incrementAsync = () => ({ type: INCREMENT_ASYNC });

@@ -1,7 +1,9 @@
-import { call, all, fork } from 'redux-saga/effects';
+import {call, all, fork} from 'redux-saga/effects';
 import countSaga from './countSaga';
 import fetchWeatherSaga from './fetchWeatherSaga';
 import cancleExampleSaga from './cancleExampleSaga';
+import forkExampleSaga from './forkExample';
+import helperFnExampleSaga from './helperFnExample';
 
 
 const forkAll = sagaList => {
@@ -10,11 +12,13 @@ const forkAll = sagaList => {
   return sagas;
 };
 
-function* mainFlow () {
+function* mainFlow() {
   yield all(forkAll([
     ...fetchWeatherSaga,
     ...countSaga,
-    ...cancleExampleSaga
+    ...cancleExampleSaga,
+    ...forkExampleSaga,
+    ...helperFnExampleSaga,
   ]));
 }
 
@@ -37,7 +41,7 @@ call(delay, 1000)        // => { CALL: {fn: delay, args: [1000]}}
 */
 
 // incrementAsync는 제네레이터 함수이다.
-  /*
-    .next() 메서드로 이터레이터 오브젝트를 소비할 때 마다 iteratorResultObject가 반환되는데
-    { done: boolean, value: any }의 형태에서 value 부분에 yield에 의해 사용되는 redux-saga 이펙트들이 반환된다.
-  */
+/*
+  .next() 메서드로 이터레이터 오브젝트를 소비할 때 마다 iteratorResultObject가 반환되는데
+  { done: boolean, value: any }의 형태에서 value 부분에 yield에 의해 사용되는 redux-saga 이펙트들이 반환된다.
+*/

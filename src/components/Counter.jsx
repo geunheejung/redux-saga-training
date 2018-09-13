@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {incrementAsync, fetchWeatherApi } from '../reducers'
+import {incrementAsync, fetchWeatherApi, mockFetchAction} from '../reducers'
 
-const Counter = ({count, incrementAsync, fetchWeatherApi}) => {
+const Counter = ({count, incrementAsync, fetchWeatherApi, mockFetchAction}) => {
   console.log(fetchWeatherApi);
   return (
     <div>
@@ -20,6 +20,9 @@ const Counter = ({count, incrementAsync, fetchWeatherApi}) => {
       >
         fetchApi
       </button>
+      <button onClick={() => { mockFetchAction() }}>
+        mock
+      </button>
     </div>
   )
 }
@@ -33,6 +36,7 @@ export default connect(
   },
   {
     incrementAsync,
-    fetchWeatherApi
+    fetchWeatherApi,
+    mockFetchAction
   }
 )(Counter);
