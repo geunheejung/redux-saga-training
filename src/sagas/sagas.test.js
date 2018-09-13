@@ -1,7 +1,7 @@
 import { delay } from 'redux-saga'
 import { put, call } from 'redux-saga/effects';
-import { incremenetAction } from '../reducers';
-import { incrementAsnyc } from './mainSaga';
+import { incrementAction } from '../reducers';
+import { incrementAsnyc } from './countSaga';
 
 describe('mainFlow saga', () => {
   const gen = incrementAsnyc();
@@ -12,7 +12,7 @@ describe('mainFlow saga', () => {
     });
 
     it('put 이펙트에 의해 incrementFetchCount Action이 dispatch 된다.', () => {
-      const expectedObject = put(incremenetAction());    
+      const expectedObject = put(incrementAction());
       expect(gen.next().value).toEqual(expectedObject);
     });
 

@@ -1,29 +1,38 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { incrementAsync, decrementAction } from '../reducers'
+import {connect} from 'react-redux';
+import {incrementAsync, fetchWeatherApi } from '../reducers'
 
-const Counter = ({ count, incrementAsync }) => {
-  console.log( count );
+const Counter = ({count, incrementAsync, fetchWeatherApi}) => {
+  console.log(fetchWeatherApi);
   return (
     <div>
-    {' '}
-    <button onClick={incrementAsync}>
-      Increment after 1 second
-    </button>
-    <hr />
-    <div>
-      Clicked: {count} times
+      {' '}
+      <button onClick={incrementAsync}>
+        Increment after 1 second
+      </button>
+      <hr/>
+      <div>
+        Clicked: {count} times
+      </div>
+
+      <button
+        onClick={() => fetchWeatherApi()}
+      >
+        fetchApi
+      </button>
     </div>
-  </div>
   )
 }
-  
+
 
 export default connect(
-  state => {  
+  state => {
     return {
       count: state,
     }
   },
-  { incrementAsync }
+  {
+    incrementAsync,
+    fetchWeatherApi
+  }
 )(Counter);

@@ -1,34 +1,25 @@
-import { delay } from 'redux-saga';
-import { all, call, put, takeEvery } from 'redux-saga/effects';
-import { INCREMENT_ASYNC, incremenetAction, decrementAction,DECREMENT_FETCH_COUNT } from '../reducers';
+import { call, all, fork } from 'redux-saga/effects';
+import countSaga from './countSaga';
+import fetchWeatherSaga from './fetchWeatherSaga';
+import cancleExampleSaga from './cancleExampleSaga';
 
-export function* incrementAsnyc() {
-  yield call(delay, 1000);
-  yield put(incremenetAction());
+
+const forkAll = sagaList => {
+  const sagas = sagaList.map(saga => fork(saga));
+
+  return sagas;
+};
+
+function* mainFlow () {
+  yield all(forkAll([
+    ...fetchWeatherSaga,
+    ...countSaga,
+    ...cancleExampleSaga
+  ]));
 }
 
-export function* decrementAsnyc() {
-  yield call(delay, 1000);
-  console.log(yield 'success setTimeout')
-  yield put(decrementAction());
-}
 
-export function* watchIncrementAsync() {
-  yield takeEvery(INCREMENT_ASYNC, incrementAsnyc);
-}
-
-export function* watchDecrement() {
-  yield takeEvery(DECREMENT_FETCH_COUNT, decrementAsnyc)
-}
-
-function* mainWatch() {
-  yield all([
-    watchIncrementAsync(),
-    watchDecrement(),
-  ])
-}
-
-export default mainWatch;
+export default mainFlow;
 
 /*
 yield delay(ms)와 yield call(delay, ms)의 차이점은
