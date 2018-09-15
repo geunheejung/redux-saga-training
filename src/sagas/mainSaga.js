@@ -4,7 +4,7 @@ import fetchWeatherSaga from './fetchWeatherSaga';
 import cancleExampleSaga from './cancleExampleSaga';
 import forkExampleSaga from './forkExample';
 import helperFnExampleSaga from './helperFnExample';
-
+import channelExampleSaga from './channelExample';
 
 const forkAll = sagaList => {
   const sagas = sagaList.map(saga => fork(saga));
@@ -14,11 +14,12 @@ const forkAll = sagaList => {
 
 function* mainFlow() {
   yield all(forkAll([
-    ...fetchWeatherSaga,
-    ...countSaga,
-    ...cancleExampleSaga,
-    ...forkExampleSaga,
-    ...helperFnExampleSaga,
+    // ...fetchWeatherSaga,
+    // ...countSaga,
+    // ...cancleExampleSaga,
+    // ...forkExampleSaga,
+    // ...helperFnExampleSaga,
+    ...channelExampleSaga,
   ]));
 }
 
